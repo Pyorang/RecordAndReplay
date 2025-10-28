@@ -1,38 +1,78 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerMove : MonoBehaviour, IReplayObject
 {
     public int moveSpeed = 1;
     public int jumpForce = 1;
-    public Vector2 inputVec;
+    public int rotateSpeed = 1;
+    public bool onGround = false;
 
+    private float input;
+    private Vector2 inputVec;
     private Rigidbody2D rb;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        inputVec = Vector2.zero;
     }
 
-    private void Update()
+    private void Start()
     {
-        rb.position += inputVec * moveSpeed * Time.deltaTime;
+        ReplayManager.instance.Register(this);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.linearVelocity = new Vector2(inputVec.x * moveSpeed, rb.linearVelocity.y);
+
+        if (!onGround)
+        {
+            transform.Rotate(Vector3.back * input * rotateSpeed * Time.deltaTime);
+        }
     }
 
     public void ActionMove(InputAction.CallbackContext context)
     {
-        if(context.performed || context.canceled)
+        if (context.performed || context.canceled)
         {
-            float input = context.ReadValue<float>();
+            input = context.ReadValue<float>();
             inputVec = new Vector2(input, 0);
         }
     }
 
     public void ActionJump(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed && onGround)
         {
-            rb.AddForce(new Vector2(0,1) * jumpForce);
+            rb.AddForce(Vector2.up * jumpForce);
         }
     }
+
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGround = true;
+        }
+    }
+
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            onGround = false;
+        }
+    }
+
+    public void SaveSnapShot()
+    {
+
+    }
+
+    public void LoadSnapShot()
+    {
+
+    }   
 }
