@@ -110,9 +110,9 @@ public class ReplayManager : MonoBehaviour
             m_nextSnapshotTime = nextSnapshot.frameTime;
         }
     }
+
     private void TakeSnapshot()
     {
-        //Playback rate might be different from recording rate, so we'll need to store the time to stay as in sync
         m_time += Time.fixedDeltaTime;
 
         SnapShotData snapShotData = new SnapShotData(m_time);

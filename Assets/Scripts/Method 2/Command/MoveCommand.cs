@@ -1,10 +1,8 @@
 using UnityEngine;
 
-public class MoveCommand : ICommand
+public class MoveCommand : ReplayCommand
 {
-    public float time;
     private float input;
-    private PlayerController playerController;
     
     public  MoveCommand(PlayerController playerController, float input, float time)
     {
@@ -13,13 +11,8 @@ public class MoveCommand : ICommand
         this.time = time;
     }
 
-    public void Execute()
+    public override void Execute()
     {
         playerController.input = input;
-    }
-
-    public float ReturnTime()
-    {
-        return time;
     }
 }

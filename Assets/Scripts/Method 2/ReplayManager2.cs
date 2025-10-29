@@ -9,7 +9,7 @@ public class ReplayManager2 : MonoBehaviour
     public float currentTime = 0;
 
     [SerializeField] private PlayerController playerController;
-    public List<ICommand> commandList = new List<ICommand>();
+    public List<ReplayCommand> commandList = new List<ReplayCommand>();
 
     public enum State
     {
