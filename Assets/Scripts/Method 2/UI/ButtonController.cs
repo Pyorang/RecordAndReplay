@@ -12,7 +12,7 @@ public class ButtonController : MonoBehaviour
             ReplayManager2.instance.StartRecord();
             buttonText.text = "PlayBack";
         }
-        if(ReplayManager2.instance.currentState == ReplayManager2.State.Recording)
+        else if(ReplayManager2.instance.currentState == ReplayManager2.State.Recording)
         {
             ReplayManager2.instance.PlayBack();
             buttonText.text = "Record";
