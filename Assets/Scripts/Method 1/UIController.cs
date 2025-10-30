@@ -9,18 +9,18 @@ public class UIController : MonoBehaviour
 
     public void OnClickButton()
     {
-        if (ReplayManager.instance.currentState == ReplayManager.State.Idle)
+        if (ReplayController.instance.currentState == ReplayController.State.Idle)
         {
-            ReplayManager.instance.StartRecording();
+            ReplayController.instance.StartRecording();
             ButtonText.text = "PlayBack";
         }
 
         else
         {
-            ReplayManager.instance.Stop();
-            ReplayManager.instance.StartPlayBack();
+            ReplayController.instance.Stop();
+            ReplayController.instance.StartPlayBack();
             ButtonText.text = "Record";
-            ReplayManager.instance.snapshotIndex = 0;
+            ReplayController.instance.snapshotIndex = 0;
         }
     }
 }

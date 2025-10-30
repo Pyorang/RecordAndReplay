@@ -1,19 +1,19 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SetPositionCommand : ReplayCommand
+public class SetPositionCommand : RecordedCommand
 {
-    private Vector3 position;
+    private Vector3 _position;
 
-    public SetPositionCommand(PlayerController playerController, Vector3 position, float time)
+    public SetPositionCommand(GameObject gameObject, float time)
     {
-        this.playerController = playerController;
-        this.position = position;
-        this.time = time;
+        this._gameObject = gameObject;
+        this._position = gameObject.transform.position;
+        this._time = time;
     }
 
     public override void Execute()
     {
-        playerController.gameObject.transform.position = position;
+        _gameObject.transform.position = _position;
     }
 }

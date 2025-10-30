@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour, IReplayObject
 
     private void Start()
     {
-        ReplayManager.instance.Register(this);
+        ReplayController.instance.Register(this);
     }
 
     private void FixedUpdate()

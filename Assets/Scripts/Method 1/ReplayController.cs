@@ -2,14 +2,14 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;   
 
-public class ReplayManager : MonoBehaviour
+public class ReplayController : MonoBehaviour
 {
     private float m_time = 0;
     public int snapshotIndex = 0;
     private float m_nextSnapshotTime;
     private bool m_hasNextSnapshot = true;
 
-    public static ReplayManager instance;
+    public static ReplayController instance;
 
     public enum State
     {

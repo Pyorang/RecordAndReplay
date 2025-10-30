@@ -1791,6 +1791,7 @@ GameObject:
   - component: {fileID: 1150370074}
   - component: {fileID: 1150370078}
   - component: {fileID: 1150370079}
+  - component: {fileID: 1150370080}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1969,8 +1970,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150370079}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1150370080}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: ActionMove
         m_Mode: 0
         m_Arguments:
@@ -1985,8 +1986,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150370079}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1150370080}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: ActionJump
         m_Mode: 0
         m_Arguments:
@@ -2066,11 +2067,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7debb912465b9cc49b5690ca045482bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 550
-  rotateSpeed: 270
-  onGround: 0
-  input: 0
+  MoveSpeed: 10
+  JumpForce: 550
+  RotateSpeed: 270
+  OnGround: 0
+--- !u!114 &1150370080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150370073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c06a36fe2427b42861736e4a535154, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _controller: {fileID: 1150370079}
 --- !u!1 &1278029631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2202,9 +2215,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d925eab858c6a46839c676d59449a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTime: 0
   playerController: {fileID: 1150370079}
-  currentState: 0
+  CurrentTime: 0
+  CurrentState: 0
 --- !u!1 &1623635146
 GameObject:
   m_ObjectHideFlags: 0

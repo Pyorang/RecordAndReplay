@@ -7,14 +7,14 @@ public class ButtonController : MonoBehaviour
 
     public void OnClick()
     {
-        if (ReplayManager2.instance.currentState == ReplayManager2.State.Idle)
+        if (ReplayManager.s_instance.CurrentState == ReplayManager.State.Idle)
         {
-            ReplayManager2.instance.StartRecord();
+            ReplayManager.s_instance.StartRecord();
             buttonText.text = "PlayBack";
         }
-        else if(ReplayManager2.instance.currentState == ReplayManager2.State.Recording)
+        else if(ReplayManager.s_instance.CurrentState == ReplayManager.State.Recording)
         {
-            ReplayManager2.instance.PlayBack();
+            ReplayManager.s_instance.PlayBack();
             buttonText.text = "Record";
         }
     }

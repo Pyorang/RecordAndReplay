@@ -3,66 +3,50 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public int moveSpeed = 1;
-    public int jumpForce = 1;
-    public int rotateSpeed = 1;
-    public bool onGround = false;
+    private Rigidbody2D _rigidBody;
 
-    public float input;
-    private Vector2 inputVec;
-    private Rigidbody2D rb;
+    private float _input;
+    private Vector2 _inputVec;
+
+    public int MoveSpeed = 1;
+    public int JumpForce = 1;
+    public int RotateSpeed = 1;
+    public bool OnGround = false;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
+        _rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector2(input * moveSpeed, rb.linearVelocity.y);
+        _rigidBody.linearVelocity = new Vector2(_input * MoveSpeed, _rigidBody.linearVelocity.y);
 
-        if (!onGround)
+        if (!OnGround)
         {
-            transform.Rotate(Vector3.back * input * rotateSpeed * Time.deltaTime);
+            transform.Rotate(Vector3.back * _input * RotateSpeed * Time.deltaTime);
         }
     }
 
-    public void ActionMove(InputAction.CallbackContext context)
+    public float GetInput()
     {
-        if(ReplayManager2.instance.currentState != ReplayManager2.State.PlayBack)
-        {
-            if (context.performed || context.canceled)
-            {
-                input = context.ReadValue<float>();
-
-                ReplayManager2.instance.commandList.Add(new MoveCommand(this, input, ReplayManager2.instance.currentTime));
-            }
-        }
+        return _input;
+    }
+    public void SetInput(float input)
+    {
+        this._input = input;
     }
 
     public void Jump()
     {
-        rb.AddForce(Vector2.up * jumpForce);
-    }
-
-    public void ActionJump(InputAction.CallbackContext context)
-    {
-        if(ReplayManager2.instance.currentState != ReplayManager2.State.PlayBack)
-        {
-            if (context.performed && onGround)
-            {
-                Jump();
-
-                ReplayManager2.instance.commandList.Add(new JumpCommand(this, ReplayManager2.instance.currentTime));
-            }
-        }
+        _rigidBody.AddForce(Vector2.up * JumpForce);
     }
 
     public void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            onGround = true;
+            OnGround = true;
         }
     }
 
@@ -70,7 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            onGround = false;
+            OnGround = false;
         }
     }
 }
